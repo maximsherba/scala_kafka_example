@@ -21,21 +21,25 @@ object Producer extends App {
                     genre: String
                   )
 
-  val path = "C:\\Users\\mscherba\\Documents\\Git\\scala_kafka_example\\scala_kafka_example\\src\\main\\resources\\source.csv"
+  val path = "src/main/resources/source.csv"
   val reader = Files.newBufferedReader(Paths.get(path))
   val records = CSVFormat.DEFAULT.parse(reader)
 
   val props = new Properties()
-  props.put("bootstrap.servers", "broker:9092")
+  props.put("bootstrap.servers", "localhost:29092")
 
   val producer = new KafkaProducer(props, new StringSerializer, new StringSerializer)
   val topic = "books"
 
   records.forEach(record => {
-    val y = record.get(0)
+    val recordHash = record.hashCode()
+    val recordNum = record.getRecordNumber.toString()
+    //println(recordNum)
+
+    //Как эффективнее сериализовывать в json?
     val book = Books.tupled((record.get(0),record.get(1),record.get(2),record.get(3),record.get(4),record.get(5),record.get(6)))
     val jsonRecord = book.asJson.noSpaces
-    producer.send(new ProducerRecord(topic, "jsonRecord", "123"))
+    producer.send(new ProducerRecord(topic, recordNum, jsonRecord))
     //println(jsonRecord)
     }
   )
