@@ -1,4 +1,4 @@
-object test extends App {
+object ReadCSV_example extends App {
   import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
   import java.nio.file.{Files, Path, Paths}
   import org.apache.commons.csv.CSVFormat
@@ -14,6 +14,7 @@ object test extends App {
                     genre: String
                   )
 
+  //TODO: Change to relative path
   val path = "C:\\Users\\mscherba\\Documents\\Git\\scala_kafka_example\\scala_kafka_example\\src\\main\\resources\\source.csv"
   val reader = Files.newBufferedReader(Paths.get(path))
   val records = CSVFormat.DEFAULT.parse(reader)

@@ -10,7 +10,6 @@ import java.util.Properties
 import java.nio.file.{Files, Paths}
 
 object Producer extends App {
-  //case class Books(name: String, author: String, userRating: Double, reviews: Int, price: Double, year: Int, genre: String)
   case class Books(
                     name: String,
                     author: String,
@@ -21,6 +20,7 @@ object Producer extends App {
                     genre: String
                   )
 
+  //TODO: Change to relative path
   val path = "C:\\Users\\mscherba\\Documents\\Git\\scala_kafka_example\\scala_kafka_example\\src\\main\\resources\\source.csv"
   val reader = Files.newBufferedReader(Paths.get(path))
   val records = CSVFormat.DEFAULT.parse(reader)
@@ -36,7 +36,6 @@ object Producer extends App {
     val book = Books.tupled((record.get(0),record.get(1),record.get(2),record.get(3),record.get(4),record.get(5),record.get(6)))
     val jsonRecord = book.asJson.noSpaces
     producer.send(new ProducerRecord(topic, "jsonRecord", "123"))
-    //println(jsonRecord)
     }
   )
 

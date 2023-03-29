@@ -7,7 +7,7 @@ import java.util.Properties
 object Producer_example extends App {
 
   val props = new Properties()
-  props.put("bootstrap.servers", "broker:9092")
+  props.put("bootstrap.servers", "broker:29092")
 
   val producer = new KafkaProducer(props, new StringSerializer, new StringSerializer)
 

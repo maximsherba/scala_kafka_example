@@ -14,7 +14,6 @@ object Consumer_example extends App {
 
   consumer.subscribe(List("mytopic").asJavaCollection)
 
-  println("TEST-----------------------")
   consumer
     .poll(Duration.ofSeconds(10))
     .asScala

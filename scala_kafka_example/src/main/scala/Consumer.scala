@@ -12,7 +12,6 @@ object Consumer extends App {
   props.put("group.id", "homework")
   //props.put("enable.auto.commit", true)
   //props.put("auto.offset.reset", "latest")
-  //props.put("isolation.level", "read_uncommitted")
 
   val consumer = new KafkaConsumer(props, new StringDeserializer, new StringDeserializer)
   val topic = "mytopic"
